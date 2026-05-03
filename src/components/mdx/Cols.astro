@@ -1,0 +1,91 @@
+---
+// src/components/mdx/Cols.astro
+//
+// 【使い方】
+// 2カラムレイアウト。テキストと画像を横に並べます。
+//
+// <Cols>
+// <div slot="left">
+//
+// ### 見出し
+// テキストをここに書く
+//
+// </div>
+// <div slot="right">
+//
+// ![写真](/images/photo.jpg)
+//
+// </div>
+// </Cols>
+//
+// <Cols reverse>  ← reverseをつけると左右が逆になります
+// ...
+// </Cols>
+//
+// ※ スマホでは自動的に縦並びになります
+
+interface Props {
+  reverse?: boolean;
+}
+
+const { reverse = false } = Astro.props;
+---
+
+<div class={`cols ${reverse ? 'cols--reverse' : ''}`}>
+  <div class="cols__left">
+    <slot name="left" />
+  </div>
+  <div class="cols__right">
+    <slot name="right" />
+  </div>
+</div>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6);
+    align-items: start;
+    margin: var(--sp-5) 0;
+  }
+
+  .cols--reverse {
+    direction: rtl;
+  }
+  .cols--reverse > * {
+    direction: ltr;
+  }
+
+  /* 画像をカラム内できれいに表示 */
+  .cols :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* テキスト調整 */
+  .cols :global(p) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 2.1;
+    margin-bottom: var(--sp-2);
+  }
+
+  .cols :global(h2),
+  .cols :global(h3) {
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sp-3);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+    .cols--reverse {
+      direction: ltr;
+    }
+  }
+</style>

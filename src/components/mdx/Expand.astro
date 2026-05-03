@@ -1,0 +1,47 @@
+---
+// src/components/mdx/Expand.astro
+//
+// 【使い方】
+// <Expand>
+// ここに「詳しく」を押したときだけ表示されるテキストを書く
+// </Expand>
+//
+// <Expand label="もっと読む">
+// ラベルを変えることもできます
+// </Expand>
+
+interface Props {
+  label?: string;
+}
+
+const { label = '詳しく' } = Astro.props;
+---
+
+<details class="expand">
+  <summary class="expand__trigger">
+    <span class="expand__icon"></span>
+    <span>{label}</span>
+  </summary>
+  <div class="expand__body">
+    <div class="expand__inner">
+      <slot />
+    </div>
+  </div>
+</details>
+
+<style>
+  /* global.css の .expand スタイルを継承。
+     追加スタイルのみここに書く。 */
+
+  .expand__inner :global(p) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 2.1;
+    margin-bottom: var(--sp-3);
+  }
+
+  .expand__inner :global(strong) {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+</style>

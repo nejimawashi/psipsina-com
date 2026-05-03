@@ -1,0 +1,109 @@
+---
+// legal.astro — 特定商取引法に基づく表記
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="特定商取引法に基づく表記"
+  description="psipsina 特定商取引法に基づく表記"
+>
+
+  <section class="section">
+    <div class="container">
+      <span class="section-label">legal</span>
+      <h1 class="page-title">特定商取引法に基づく表記</h1>
+
+      <dl class="legal-table">
+        <div class="legal-table__row">
+          <dt>販売業者</dt>
+          <dd>psipsina</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>所在地</dt>
+          <dd>神奈川県茅ヶ崎市（詳細はお問い合わせください）</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>お問い合わせ</dt>
+          <dd><a href="/contact">お問い合わせフォーム</a>よりご連絡ください</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>販売価格</dt>
+          <dd>各商品ページに記載の価格（税込）</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>送料</dt>
+          <dd>別途発送時にご案内いたします</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>お支払い方法</dt>
+          <dd>クレジットカード（Square決済）</dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>お届け時期</dt>
+          <dd>
+            現在、ご注文から1年以上のお時間をいただいております。
+            発送前にメールにてご連絡いたします。
+          </dd>
+        </div>
+        <div class="legal-table__row">
+          <dt>返品・キャンセル</dt>
+          <dd>
+            発送前のキャンセルは受け付けております。
+            <a href="/contact">お問い合わせフォーム</a>よりご連絡ください。
+            食品のため、お届け後の返品はお受けできません。
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-weight: 400;
+    font-size: var(--text-xl);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sp-8);
+  }
+
+  .legal-table {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .legal-table__row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: baseline;
+  }
+
+  @media (max-width: 500px) {
+    .legal-table__row {
+      grid-template-columns: 1fr;
+      gap: var(--sp-1);
+    }
+  }
+
+  dt {
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+  }
+
+  dd {
+    font-size: var(--text-sm);
+    line-height: 1.8;
+  }
+
+  dd a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  dd a:hover {
+    color: var(--color-muted);
+  }
+</style>

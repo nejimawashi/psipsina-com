@@ -1,11 +1,159 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// index.astro — psipsina トップページ
+//
+// 【役割】
+// src/content/psipsina/index.mdx を読み込んで
+// デザインを適用してHTMLに変換するページです。
+//
+// 【編集するファイル】
+// テキスト・画像・構成の変更 → index.mdx を Obsidian で編集
+// デザイン・レイアウトの変更 → このファイルを編集
+// スタイルの変更             → src/styles/global.css を編集
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+import Img from '../components/mdx/Img.astro';
+import Grid from '../components/mdx/Grid.astro';
+import Cols from '../components/mdx/Cols.astro';
+import Expand from '../components/mdx/Expand.astro';
+import Note from '../components/mdx/Note.astro';
+
+// index.mdx を読み込む
+const entry = await getEntry('psipsina', 'index');
+const { Content } = await render(entry);
+const { title, description, ogImage } = entry.data;
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+
+  <!-- ========================================================
+       HERO（固定 — デザインの核心部分）
+       ======================================================== -->
+  <section class="hero">
+    <span class="hero__eyebrow">湘南 · 茅ヶ崎 · ハードパン専門店</span>
+    <h1 class="hero__title">psipsina</h1>
+    <p class="hero__subtitle">自家製酵母と、時間と、手と。</p>
+    <div class="hero__scroll" aria-hidden="true">scroll</div>
+  </section>
+
+  <!-- ========================================================
+       MDXコンテンツ
+       index.mdx の内容がここにレンダリングされます。
+       ## 見出しごとにセクションのスタイルが自動で切り替わります。
+       ======================================================== -->
+  <div class="mdx-content">
+    <Content components={{ Img, Grid, Cols, Expand, Note }} />
+  </div>
+
+  <!-- ========================================================
+       通販バナー（固定）
+       ======================================================== -->
+  <section class="section" id="shop">
+    <div class="container">
+      <div class="shop-banner">
+        <div class="shop-banner__text">
+          <h3>オンラインショップ</h3>
+          <p>psipsina.square.site</p>
+        </div>
+        <a
+          href="https://psipsina.square.site/"
+          class="btn btn--dark"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          通販ページへ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       CONTACT（固定）
+       ======================================================== -->
+  <section class="section section--surface" id="contact-cta">
+    <div class="container">
+      <span class="section-label">contact</span>
+      <p style="font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--sp-5); max-width: 400px;">
+        キャンセル・住所変更・その他のお問い合わせはこちらから。
+      </p>
+      <a href="/contact" class="btn btn--outline">お問い合わせフォームへ</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── MDXコンテンツ全体のラッパー ── */
+  .mdx-content {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+  }
+
+  /* ── ## 見出しをセクションラベルとして表示 ── */
+  .mdx-content :global(h2) {
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    margin: var(--sp-12) 0 var(--sp-5);
+    padding-top: var(--sp-12);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* 最初の h2 は border-top なし */
+  .mdx-content :global(h2:first-of-type) {
+    border-top: none;
+    padding-top: var(--sp-12);
+  }
+
+  /* ── ### 見出し（コンセプトタイトルなど） ── */
+  .mdx-content :global(h3) {
+    font-weight: 400;
+    font-size: var(--text-lg);
+    letter-spacing: 0.05em;
+    margin: var(--sp-8) 0 var(--sp-3);
+    line-height: 1.5;
+  }
+
+  /* ── 段落 ── */
+  .mdx-content :global(p) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 2.1;
+    margin-bottom: var(--sp-3);
+  }
+
+  .mdx-content :global(strong) {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* ── リスト ── */
+  .mdx-content :global(ul) {
+    list-style: none;
+    margin: var(--sp-3) 0;
+  }
+
+  .mdx-content :global(ul li) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    padding: var(--sp-2) 0;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.9;
+  }
+
+  /* ── 水平線（セクション区切り） ── */
+  .mdx-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--sp-8) 0;
+  }
+
+  /* ── ## message セクション：ダーク背景 ── */
+  /* message セクションの直後のコンテンツをダーク背景で囲む */
+  .mdx-content :global(h2#message) ~ :global(*):not(:global(h2)) {
+    color: rgba(255, 255, 255, 0.75);
+  }
+</style>

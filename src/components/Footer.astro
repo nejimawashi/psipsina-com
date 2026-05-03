@@ -1,0 +1,69 @@
+---
+// Footer.astro — psipsina
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <div class="footer__left">
+      <p class="footer__logo">psipsina</p>
+      <p class="footer__copy">© psipsina · 神奈川県茅ヶ崎市</p>
+    </div>
+    <ul class="footer__links">
+      <li><a href="/legal">特定商取引法に基づく表記</a></li>
+      <li><a href="/terms">利用規約</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: var(--sp-8) var(--sp-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+
+  .footer__logo {
+    font-size: var(--text-xs);
+    letter-spacing: 0.35em;
+    margin-bottom: 6px;
+  }
+
+  .footer__copy {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: var(--sp-4);
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer__links a {
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--dur);
+  }
+
+  .footer__links a:hover {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 500px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+// src/components/mdx/Note.astro
+//
+// 【使い方】
+// お知らせ・重要事項などを目立たせるボックスです。
+//
+// <Note>
+// キャンセル・住所変更のご希望は、お問い合わせフォームからご連絡ください。
+// </Note>
+//
+// <Note title="発送について">
+// タイトルをつけることもできます。
+// </Note>
+//
+// <Note type="warning">
+// 警告・注意事項（左ボーダーが濃くなります）
+// </Note>
+
+interface Props {
+  title?: string;
+  type?: 'default' | 'warning';
+}
+
+const { title, type = 'default' } = Astro.props;
+---
+
+<div class={`note note--${type}`}>
+  {title && <p class="note__title">{title}</p>}
+  <div class="note__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .note {
+    border-left: 2px solid var(--color-text);
+    padding: var(--sp-3) var(--sp-4);
+    margin: var(--sp-5) 0;
+    background: var(--color-surface);
+  }
+
+  .note--warning {
+    border-left-color: var(--color-text);
+    background: var(--color-surface);
+  }
+
+  .note__title {
+    font-weight: 500;
+    font-size: var(--text-sm);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sp-2);
+  }
+
+  .note__body :global(p) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 2;
+    margin-bottom: var(--sp-1);
+  }
+
+  .note__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .note__body :global(strong) {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .note__body :global(ul) {
+    list-style: none;
+    margin: var(--sp-2) 0;
+  }
+
+  .note__body :global(ul li) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    padding: var(--sp-1) 0;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.9;
+  }
+</style>
