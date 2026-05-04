@@ -1,5 +1,4 @@
 ---
-// contact.astro — お問い合わせページ
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -7,7 +6,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="お問い合わせ"
   description="psipsinaへのお問い合わせ。キャンセル・住所変更・その他ご連絡はこちらから。"
 >
-
   <section class="section">
     <div class="container">
       <span class="section-label">contact</span>
@@ -16,12 +14,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         キャンセル・住所変更・その他のご連絡はこちらのフォームからお送りください。
       </p>
       <div class="form-wrap">
-        <div data-tally-src="https://tally.so/r/Bz8LDe" data-tally-width="100%" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"></div>
-        <script async src="https://tally.so/widgets/embed.js"></script>
+        <iframe
+          src="https://tally.so/r/Bz8LDe"
+          width="100%"
+          height="800"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="お問い合わせフォーム"
+        ></iframe>
       </div>
     </div>
   </section>
-
 </BaseLayout>
 
 <style>
@@ -31,7 +35,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.05em;
     margin-bottom: var(--sp-3);
   }
-
   .page-lead {
     font-size: var(--text-sm);
     color: var(--color-muted);
@@ -39,7 +42,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: var(--sp-6);
     max-width: 480px;
   }
-
   .form-wrap {
     border-top: 1px solid var(--color-border);
     padding-top: var(--sp-5);
