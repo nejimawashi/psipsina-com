@@ -65,7 +65,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   font-size: var(--text-base);
   line-height: 2;
   -webkit-font-smoothing: antialiased;
@@ -489,29 +489,68 @@ details[open] .expand__body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: var(--sp-4);
-  padding: var(--sp-8) var(--sp-4);
   position: relative;
+  overflow: hidden;
+}
+
+/* 背景画像 */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* 暗めのオーバーレイ（テキストを読みやすく） */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 1;
+}
+
+/* テキストコンテンツ */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-8) var(--sp-4);
 }
 
 .hero__eyebrow {
   font-size: var(--text-xs);
   letter-spacing: 0.35em;
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.65);
   text-transform: uppercase;
 }
 
 .hero__title {
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   font-size: var(--text-3xl);
   letter-spacing: 0.35em;
   line-height: 1.1;
+  color: #fff;
 }
 
 .hero__subtitle {
   font-size: var(--text-sm);
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.65);
   letter-spacing: 0.2em;
 }
 
@@ -520,13 +559,14 @@ details[open] .expand__body {
   bottom: var(--sp-6);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--sp-2);
   font-size: var(--text-xs);
   letter-spacing: 0.25em;
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.45);
   white-space: nowrap;
 }
 
@@ -535,7 +575,7 @@ details[open] .expand__body {
   display: block;
   width: 1px;
   height: 40px;
-  background: var(--color-muted);
+  background: rgba(255, 255, 255, 0.45);
   animation: scrollline 2s ease-in-out infinite;
 }
 
