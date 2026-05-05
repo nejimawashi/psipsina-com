@@ -1,165 +1,223 @@
 ---
-// index.astro — psipsina トップページ
-//
-// 【役割】
-// src/content/psipsina/index.mdx を読み込んで
-// デザインを適用してHTMLに変換するページです。
-//
-// 【編集するファイル】
-// テキスト・画像・構成の変更 → index.mdx を Obsidian で編集
-// デザイン・レイアウトの変更 → このファイルを編集
-// スタイルの変更             → src/styles/global.css を編集
-
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getEntry, render } from 'astro:content';
-import Img from '../components/mdx/Img.astro';
-import Grid from '../components/mdx/Grid.astro';
-import Cols from '../components/mdx/Cols.astro';
-import Expand from '../components/mdx/Expand.astro';
-import Note from '../components/mdx/Note.astro';
-
-// index.mdx を読み込む
-const entry = await getEntry('psipsina', 'index');
-const { Content } = await render(entry);
-const { title, description, ogImage } = entry.data;
+title: "psipsina"
+description: "ルヴァンのパンとフィーカのお菓子の専門店。自家製ルヴァンと、時間と、手と。"
+ogImage: "/images/og.jpg"
+updatedAt: 2026-05-03
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage}>
+{/* ============================================================
+    このファイルはObsidianで編集します。
+    保存 → git push するだけでサイトに反映されます。
 
-  <!-- ========================================================
-       HERO（固定 — デザインの核心部分）
-       ======================================================== -->
-  <section class="hero">
-    <div class="hero__bg">
-      <img src="/images/IMG_5058.jpeg" alt="psipsinaの入口" />
-    </div>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <span class="hero__eyebrow">ルヴァンのパンとフィーカのお菓子の専門店</span>
-      <h1 class="hero__title">psipsina</h1>
-      <p class="hero__subtitle">自家製酵母と、時間と、手と。</p>
-    </div>
-    <div class="hero__scroll" aria-hidden="true">scroll</div>
-  </section>
+    【使えるコンポーネント】
+    <Img>    : 画像（size="sm/md/lg/full"）
+    <Grid>   : 写真グリッド（cols={2} か cols={3}）
+    <Cols>   : 2カラムレイアウト
+    <Expand> : 「詳しく」アコーディオン
+    <Note>   : お知らせボックス
+    ============================================================ */}
 
-  <!-- ========================================================
-       MDXコンテンツ
-       index.mdx の内容がここにレンダリングされます。
-       ## 見出しごとにセクションのスタイルが自動で切り替わります。
-       ======================================================== -->
-  <div class="mdx-content">
-    <Content components={{ Img, Grid, Cols, Expand, Note }} />
-  </div>
+## notice
 
-  <!-- ========================================================
-       通販バナー（固定）
-       ======================================================== -->
-  <section class="section" id="shop">
-    <div class="container">
-      <div class="shop-banner">
-        <div class="shop-banner__text">
-          <h3>オンラインショップ</h3>
-          <p>psipsina.square.site</p>
-        </div>
-        <a
-          href="https://psipsina.square.site/"
-          class="btn btn--dark"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          通販ページへ
-        </a>
-      </div>
-    </div>
-  </section>
+この度、長く親しんだ、茅ヶ崎のpsipsinaの工房を、手放すことにしました
 
-  <!-- ========================================================
-       CONTACT（固定）
-       ======================================================== -->
-  <section class="section section--surface" id="contact-cta">
-    <div class="container">
-      <span class="section-label">contact</span>
-      <p style="font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--sp-5); max-width: 400px;">
-        キャンセル・住所変更・その他のお問い合わせはこちらから。
-      </p>
-      <a href="/contact" class="btn btn--outline">お問い合わせフォームへ</a>
-    </div>
-  </section>
+これは終わりではありません
 
-</BaseLayout>
+ひとつの移ろいを経て、場所を変えて続いていく
 
-<style>
-  /* ── MDXコンテンツ全体のラッパー ── */
-  .mdx-content {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 0 var(--sp-4);
-  }
+風向きが変わるような、自然な変化として捉えています
 
-  /* ── ## 見出しをセクションラベルとして表示 ── */
-  .mdx-content :global(h2) {
-    font-size: var(--text-xs);
-    font-weight: 400;
-    letter-spacing: 0.35em;
-    color: var(--color-muted);
-    text-transform: uppercase;
-    margin: var(--sp-12) 0 var(--sp-5);
-    padding-top: var(--sp-12);
-    border-top: 1px solid var(--color-border);
-  }
+<Expand label="この想いについて、もう少し">
+これまで通販でご注文いただき、パンが届くのを長いあいだ待っていてくださる方がいること、
 
-  /* 最初の h2 は border-top なし */
-  .mdx-content :global(h2:first-of-type) {
-    border-top: none;
-    padding-top: var(--sp-12);
-  }
+そのことに、心から感謝しています
 
-  /* ── ### 見出し（コンセプトタイトルなど） ── */
-  .mdx-content :global(h3) {
-    font-weight: 400;
-    font-size: var(--text-lg);
-    letter-spacing: 0.05em;
-    margin: var(--sp-8) 0 var(--sp-3);
-    line-height: 1.5;
-  }
+少し前から、わたしの心は
+あの場所を離れ、別の静けさへと向かっていました
 
-  /* ── 段落 ── */
-  .mdx-content :global(p) {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    line-height: 2.1;
-    margin-bottom: var(--sp-3);
-  }
+そしてここしばらく、
+あの場所で、これまでのように動き続けることが
+できなくなっている自分にも気づいていました
 
-  .mdx-content :global(strong) {
-    color: var(--color-text);
-    font-weight: 500;
-  }
+理由をひとつにすることはできないけれど、
+心と身体のリズムが、
+いままでの暮らしとは違う速さを求めているように感じています
 
-  /* ── リスト ── */
-  .mdx-content :global(ul) {
-    list-style: none;
-    margin: var(--sp-3) 0;
-  }
+パン作りは、わたしにとって
+ひとつの表現であり、
+暮らしと深く結びついた営みでもあります
 
-  .mdx-content :global(ul li) {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    padding: var(--sp-2) 0;
-    border-bottom: 1px solid var(--color-border);
-    line-height: 1.9;
-  }
+パン作りは、パン以外の創作活動と同様に、
+わたしにとってひとつの表現として、これからも続いていきます
 
-  /* ── 水平線（セクション区切り） ── */
-  .mdx-content :global(hr) {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: var(--sp-8) 0;
-  }
+その中で、ひとつはっきりと感じていることがあります
 
-  /* ── ## message セクション：ダーク背景 ── */
-  /* message セクションの直後のコンテンツをダーク背景で囲む */
-  .mdx-content :global(h2#message) ~ :global(*):not(:global(h2)) {
-    color: rgba(255, 255, 255, 0.75);
-  }
-</style>
+無理の中で焼き続けるよりも、
+静かな喜びの中で焼くことの方が、
+パンは、より素直に、美しくなるということです
+
+これまでの場所では、どうしても
+忙しさや時間に追われる中で、
+その在り方を十分に叶えることができませんでした
+
+これからは、いまの自分のリズムに合ったかたちで、
+無理なく、自然にパンと向き合っていきたいと思っています
+
+それが、いまのわたしにとって
+いちばん誠実なパン作りだと感じているからです
+
+そのため、いま暮らしている場所に
+小さな工房をつくり、
+あらためて、静かにわたしのパンを焼いていきます
+
+ただ、その準備にはもう少し時間が必要で、
+完成の時期は、まだはっきりとは決まっていません
+
+現在ご注文いただいている通販のパンは、
+新しい工房が整い次第、
+順にお届けしていく予定です
+
+これまで以上に、長い時間を
+お待たせするかたちになりますが、
+ひとつひとつ、大切にお届けしていきたいと思っています
+
+もし、その時間を待つことが難しいときは、
+どうか遠慮なく、キャンセルをお知らせください
+
+待つことも、手放すことも、
+どちらも大切な選択として、
+静かに受け取らせていただきます
+
+なお、いまいただいているご注文を大切にお届けするため、
+通販の新規受付は一度締め切らせていただきます
+
+再開については、新しい工房が整った後、
+あらためてご案内できればと思っています
+
+パンはこれからも、
+わたしの中にある小さな燈のように、
+かたちを変えながら続いていきます
+
+新しい場所で焼きあがる、わたしのパンの形を
+わたし自身も、心に優しく思い描いています
+
+これからも、どこか遠くから
+そっと見守っていただけたら嬉しいです
+
+psipsina
+</Expand>
+　
+
+---
+移転時期の詳細は、別途ホームページやinstagramでお知らせいたします。
+
+## message
+
+もともと、わたしはアートを パンという形で表現したくて 2014年に、psipsinaをはじめました  
+  
+パン以外にも、季節を映すオリジナルのラッピングペーパーを作ったり、 ひとつひとつのパンに物語を込めたり… 小さなお店の中で、ささやかな”作品”を生み出してきたつもりです  
+  
+けれどパン屋の仕事は、本当に息つく間もないほど忙しくて… わたしの中にある”表現したい気持ち”を ゆっくりと育てる時間が、どうしても足りませんでした  
+  
+psipsinaは、この春をもって 静かに幕を閉じることにしました  
+  
+街という喧騒をはなれて、 静かな時間の中で生きて行きたくなったのです  
+  
+これからは、もう少しやさしい時間の中で 新しい章を、創作活動とともに… 静かに紡いでいけたらと思っています  
+  
+季節のパンや、セムラ、シュトレン… 必要な時に、必要な人へ そっとお届けする小さな魔法は、 これからも、ひっそりと続いていくかもしれません  
+  
+これからも、どうぞ遠くから、そっと見守っていてくださいね  
+  
+10年間の感謝を込めて — psipsina　2024/4/6
+
+<Expand label="この想いについて、もう少し">
+これまで、psipsinaのパンを届けるために、眠る時間を削り、パンを焼くこと以外のほとんどのことを手放して、psipsinaを続けてきました。  
+  
+店舗営業をしていると、いろいろな部分で、特に時間的なところに制限があります。そんな中では、どうしても急いでパンを焼くことが避けられない状況も出てきてしまいます。  
+  
+けれど、ふと気がつきました。ゆっくりと、静かな心で、からだと心に無理のないリズムでパンを焼くこと。それが、パンにとっても、わたしにとっても、**最も幸せなあり方** なのではないかと。  
+  
+そんな暮らしの中から生まれたパンを、これからは、そっと、お客さまのもとへ届けていきたいと思うのです。
+</Expand>
+
+---
+
+## about
+
+<Cols>
+<div slot="left">
+
+### 猫の額ほどの小さなパン屋
+
+黒猫の看板が目印の、湘南地方唯一の自家製のルヴァンのみを使ったパンの専門店。  
+神奈川県茅ヶ崎市の閑静な住宅地に、見つける気にならないと見つからないくらいひっそりと佇むパン屋。それがpsipsinaのはじまりでした。
+
+</div>
+<div slot="right">
+
+<Img src="/images/pf-2d9e8162--10.jpg" alt="psipsinaの外観" />
+
+</div>
+</Cols>
+
+<Grid cols={3} gap="none">
+<Img src="/images/02.jpg" alt="パンの写真" />
+<Img src="/images/pf-fd1b9214--5.webp" alt="パンの写真" />
+<Img src="/images/pf-14ce4949--8.webp" alt="パンの写真" />
+</Grid>
+
+---
+
+## concept
+
+### 01 素材
+
+具材以外、一切の副材料は使いません。粉と塩と水と酵母だけ。自然から頂いたリーンな素材を、手と時間だけはたっぷりかけて。
+
+<Expand>
+psipsinaのパンには、具材入りのパンに入ってるもの以外、一切の副材料は使いません。基本、粉と塩と水と酵母だけ。賞味期限を無理やり伸ばしたり、不自然なくらい柔らかく瑞々しくさせたりといったことはしない。
+
+ただ、麦の焼けた香ばしさ、スパイスの芳香、それらを心地よく変化させる酵母のチカラといった、安心して召し上がっていただけるような、自然から頂いたリーン（簡素）な素材を使って、手と時間だけはたっぷりとかけて生地を作ります。
+
+ドライフルーツ、チーズやスパイスなどの具材を入れる時は、惜しまずにたっぷりと。ご家庭でも安心して使えるシンプルで素朴な素材をふんだんに使い、プロの手仕事・技術を使って丁寧に作り上げています。
+</Expand>
+
+<Img src="/images/pf-14ce4949--8.webp" alt="素材" size="lg" />
+
+---
+
+### 02 ルヴァンと製法
+
+自家製ルヴァンと自家製ライサワーを使用。  
+唯一無二の味を生み出す、ささやかなこだわり。
+
+<Expand>
+多くのベーカリーは発酵にいわゆるイーストや、購入した自然酵母などを使います。でもpsipsinaでは、味や食感の決め手になる **ルヴァン（自然発酵酵母）** やライ麦由来の自家製ライサワーを手ずから起こして使っています。  
+  
+psipsinaは、パン作りの王道に縛られることなく、独自の製法を試し、試行錯誤の上で採用し、psipsinaらしい味を生み出してきました。  
+また、日本ではまだあまり知られていない、古い時代の珍しい製法なども研究し、じっくりと時間と手をかけ、美味しさを引き出します。  
+中には焼き上げるまでに7日から２週間ほど時間かけるパンも。  
+たくさんのパンを焼き上げるために、発酵を早めたりすることもないため、焼き上げることのできるパンには数に限りがあります。  
+  
+粉と塩と水だけを使い、時間と手間だけはたっぷりとかけて、芳醇な香りと深い味わいを生み出し、仕上げられるパン。  
+それがpsipsinaのパンです。
+</Expand>
+
+<Img src="/images/01-1660744335047.webp" alt="ルヴァン" size="lg" />
+
+---
+
+### 03 Bien cuit
+
+色濃く仕上げた”良く焼き”。しっかりと焼かれた表皮が旨味と香りを閉じ込め、美味しさを長く保ちます。質実剛健、地味だけど確かな美しさ。
+
+<Expand>
+psipsinaのパンは基本『Bien cuit』（色濃く仕上げた良く焼き）。しっかりと焼き上げられたパンの表皮は、パンの中に含まれた水分と旨味、香りを閉じ込め、美味しさを長く保ちます。  
+  
+日本でよく見る、薄いきつね色の焼き上がりのパンとは違って、色濃く焼き上げられたパンは、一見ごげているようにも見えて、手強そうな印象を受けられる方もいらっしゃると思いますが、油脂や糖の入らないパンのしっかりと焼き上げられた表皮は、甘く芳しい芳香を放ちます。これは **焦げる一歩手前まで焼き上げられたパンにしか醸し出せないもの。  
+  
+飾り気は無いけれど、ひとつひとつ手をかけた丁寧な作業から生まれる、真面目でしっかりとした美味しさに裏付けされた、地味だけど確かなこだわりです。
+</Expand>
+
+<Img src="/images/pf-b299e969--R06.webp" alt="Bien cuit" size="lg" />
