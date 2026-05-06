@@ -1,28 +1,23 @@
 ---
+// contact.astro — お問い合わせ
+// 【編集するファイル】コンテンツ → src/content/psipsina/contact.mdx
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+import TallyForm from '../components/mdx/TallyForm.astro';
+
+const entry = await getEntry('psipsina', 'contact');
+const { Content } = await render(entry);
+const { title, description } = entry.data;
 ---
 
-<BaseLayout
-  title="お問い合わせ"
-  description="psipsinaへのお問い合わせ。キャンセル・住所変更・その他ご連絡はこちらから。"
->
+<BaseLayout title={title} description={description}>
   <section class="section">
     <div class="container">
       <span class="section-label">contact</span>
-      <h1 class="page-title">お問い合わせ</h1>
-      <p class="page-lead">
-        キャンセル・住所変更・その他のご連絡はこちらのフォームからお送りください。
-      </p>
-      <div class="form-wrap">
-        <iframe
-          src="https://tally.so/r/Bz8LDe"
-          width="100%"
-          height="800"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="お問い合わせフォーム"
-        ></iframe>
+      <h1 class="page-title">{title}</h1>
+      <div class="contact-body">
+        <Content components={{ TallyForm }} />
       </div>
     </div>
   </section>
@@ -35,15 +30,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.05em;
     margin-bottom: var(--sp-3);
   }
-  .page-lead {
+
+  .contact-body :global(p) {
     font-size: var(--text-sm);
     color: var(--color-muted);
     line-height: 2;
     margin-bottom: var(--sp-6);
     max-width: 480px;
-  }
-  .form-wrap {
-    border-top: 1px solid var(--color-border);
-    padding-top: var(--sp-5);
   }
 </style>

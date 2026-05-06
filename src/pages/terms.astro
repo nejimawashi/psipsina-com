@@ -1,61 +1,25 @@
 ---
 // terms.astro — 利用規約
+// 【編集するファイル】コンテンツ → src/content/psipsina/terms.mdx
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('psipsina', 'terms');
+const { Content } = await render(entry);
+const { title, description } = entry.data;
 ---
 
-<BaseLayout
-  title="利用規約"
-  description="psipsina 利用規約"
->
-
+<BaseLayout title={title} description={description}>
   <section class="section">
     <div class="container">
       <span class="section-label">terms</span>
-      <h1 class="page-title">利用規約</h1>
-
-      <div class="terms-body prose">
-        <h2>第1条（適用）</h2>
-        <p>
-          本規約は、psipsina（以下「当店」）が提供するウェブサイトおよび通販サービスの利用に関する条件を定めるものです。
-          ご利用の前に必ずお読みください。
-        </p>
-
-        <h2>第2条（注文・契約の成立）</h2>
-        <p>
-          ご注文は、当店が注文確認メールを送信した時点で契約が成立するものとします。
-          在庫状況等により、ご注文をお断りする場合があります。
-        </p>
-
-        <h2>第3条（お届けについて）</h2>
-        <p>
-          現在、ご注文から発送まで1年以上のお時間をいただいております。
-          発送の際は事前にメールにてご連絡いたします。
-          発送先住所に変更がある場合は、発送前に<a href="/contact">お問い合わせフォーム</a>よりご連絡ください。
-        </p>
-
-        <h2>第4条（キャンセル）</h2>
-        <p>
-          発送前のキャンセルは承っております。
-          <a href="/contact">お問い合わせフォーム</a>よりお申し出ください。
-          食品の性質上、発送後のキャンセル・返品はお受けできません。
-        </p>
-
-        <h2>第5条（免責事項）</h2>
-        <p>
-          天災・不可抗力その他当店の責に帰さない事由により生じた損害について、当店は責任を負いません。
-        </p>
-
-        <h2>第6条（規約の変更）</h2>
-        <p>
-          当店は、必要に応じて本規約を変更することがあります。
-          変更後の規約は、本ウェブサイトに掲載した時点から効力を生じるものとします。
-        </p>
-
-        <p class="terms-date">制定：2014年 / 最終更新：2025年</p>
+      <h1 class="page-title">{title}</h1>
+      <div class="terms-body">
+        <Content />
       </div>
     </div>
   </section>
-
 </BaseLayout>
 
 <style>
@@ -66,7 +30,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: var(--sp-8);
   }
 
-  .terms-body h2 {
+  .terms-body :global(h2) {
     font-weight: 400;
     font-size: var(--text-base);
     letter-spacing: 0.1em;
@@ -75,26 +39,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-bottom: 1px solid var(--color-border);
   }
 
-  .terms-body p {
+  .terms-body :global(p) {
     font-size: var(--text-sm);
     color: var(--color-muted);
     line-height: 2;
     margin-bottom: var(--sp-2);
   }
 
-  .terms-body a {
+  .terms-body :global(a) {
     color: var(--color-text);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
-  .terms-body a:hover {
+  .terms-body :global(a:hover) {
     color: var(--color-muted);
-  }
-
-  .terms-date {
-    margin-top: var(--sp-8);
-    font-size: var(--text-xs);
-    letter-spacing: 0.1em;
   }
 </style>

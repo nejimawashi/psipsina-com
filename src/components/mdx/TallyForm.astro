@@ -1,0 +1,31 @@
+---
+// TallyForm.astro — Tally埋め込みフォームコンポーネント
+// 使い方（MDXから）:
+//   <TallyForm src="https://tally.so/r/Bz8LDe" />
+
+interface Props {
+  src: string;
+  height?: number;
+}
+
+const { src, height = 800 } = Astro.props;
+---
+
+<div class="form-wrap">
+  <iframe
+    src={src}
+    width="100%"
+    height={height}
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title="お問い合わせフォーム"
+  ></iframe>
+</div>
+
+<style>
+  .form-wrap {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--sp-5);
+  }
+</style>

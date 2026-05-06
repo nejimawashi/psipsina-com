@@ -10,19 +10,20 @@
 // 【コレクション構成】
 // src/content/psipsina/
 //   └── index.mdx        ← トップページ（Obsidianで編集）
+//   └── contact.mdx      ← お問い合わせ
+//   └── legal.mdx        ← 特定商取引法に基づく表記
+//   └── terms.mdx        ← 利用規約
 //   └── stollen2025.mdx  ← シュトレンページ（予定）
 //   └── semla2025.mdx    ← セムラページ（予定）
-//   └── legal-notice.mdx ← 特定商取引法（予定）
-//   └── terms.mdx        ← 利用規約（予定）
 
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // ── psipsina コレクション ──────────────────────────────────────
 const psipsina = defineCollection({
-  // glob loader: src/content/psipsina/ 以下の .mdx と .md を読み込む
+  // glob loader: src/content/psipsina/ 以下のすべての .mdx と .md を読み込む
   loader: glob({
-    pattern: 'index.{md,mdx}',
+    pattern: '**/*.{md,mdx}',
     base: './src/content/psipsina',
   }),
 
