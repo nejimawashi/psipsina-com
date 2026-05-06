@@ -4,7 +4,6 @@
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEntry, render } from 'astro:content';
-import LegalTable from '../components/mdx/LegalTable.astro';
 
 const entry = await getEntry('psipsina', 'legal');
 const { Content } = await render(entry);
@@ -16,7 +15,9 @@ const { title, description } = entry.data;
     <div class="container">
       <span class="section-label">legal</span>
       <h1 class="page-title">{title}</h1>
-      <Content components={{ LegalTable }} />
+      <div class="legal-body">
+        <Content />
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -27,5 +28,31 @@ const { title, description } = entry.data;
     font-size: var(--text-xl);
     letter-spacing: 0.05em;
     margin-bottom: var(--sp-8);
+  }
+
+  .legal-body :global(h2) {
+    font-weight: 400;
+    font-size: var(--text-base);
+    letter-spacing: 0.1em;
+    margin: var(--sp-6) 0 var(--sp-2);
+    padding-bottom: var(--sp-1);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-body :global(p) {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 2;
+    margin-bottom: var(--sp-2);
+  }
+
+  .legal-body :global(a) {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-body :global(a:hover) {
+    color: var(--color-muted);
   }
 </style>
